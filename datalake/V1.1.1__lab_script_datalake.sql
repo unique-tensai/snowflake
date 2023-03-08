@@ -9,7 +9,7 @@
 
 use role ACCOUNTADMIN;
 create or replace warehouse COMPUTE_WH with
-  warehouse_size = 'xlarge'
+  warehouse_size = 'small'
   auto_suspend = 300
   initially_suspended = true;
 
