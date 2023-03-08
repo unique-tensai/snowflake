@@ -7,18 +7,18 @@
 
 -- 1.2.1 Create a virtual warehouse cluster
 
-use role SYSADMIN;
-create or replace warehouse LOAD_WH with
+use role ACCOUNTADMIN;
+create or replace warehouse COMPUTE_WH with
   warehouse_size = 'xlarge'
   auto_suspend = 300
   initially_suspended = true;
 
-use warehouse LOAD_WH;
+use warehouse COMPUTE_WH;
 
 -- 1.2.2 Create the new empty CITIBIKE_LAB database
 
 create or replace database CITIBIKE_LAB;
-create or replace schema DEMO;
+create or replace schema DEMO_DB;
 create or replace schema UTILS;
 
 -- 1.2.3  Create an API integration to support creating an external function call to a REST API
@@ -33,11 +33,11 @@ create or replace api integration fetch_http_data
   enabled = true
   api_allowed_prefixes = ('https://yz02202.execute-api.ap-south-1.amazonaws.com/prod/fetchhttpdata');
 
-grant usage on integration fetch_http_data to role sysadmin;
+grant usage on integration fetch_http_data to role ACCOUNTADMIN;
 
 -- 1.2.4
 -- Now create the external function that uses the API integration object
-use role sysadmin;
+use role ACCOUNTADMIN;
 
 -- create the function
 create or replace external function utils.fetch_http_data(v varchar)
@@ -48,7 +48,7 @@ create or replace external function utils.fetch_http_data(v varchar)
 
 -- 1.2.5 Create a few reference tables and populate them with data.
 
-use schema DEMO;
+use schema DEMO_DB;
 create or replace table GBFS_JSON (
   data	varchar,
   url	varchar,
@@ -127,8 +127,8 @@ from s
 
 -- 2.1.1  Set context
 
-use schema demo;
-use role SYSADMIN;
+use schema DEMO_DB;
+use role ACCOUNTADMIN;
 
 create or replace stage CITIBIKE_STAGE
   url = 's3://sfquickstarts/VHOL Snowflake for Data Lake/'
@@ -269,8 +269,8 @@ order by 3 desc;
 
 --  3.1.1  Create the materialized view
 
-use role SYSADMIN;
-use schema DEMO;
+use role ACCOUNTADMIN;
+use schema DEMO_DB;
 
 create or replace materialized view TRIPS_MV as
 select
