@@ -31,7 +31,7 @@ create or replace api integration fetch_http_data
   api_provider = aws_api_gateway
   api_aws_role_arn = 'arn:aws:iam::148887191972:role/ExecuteLambdaFunction'
   enabled = true
-  api_allowed_prefixes = ('https://dr14z5kz5d.execute-api.us-east-1.amazonaws.com/prod/fetchhttpdata');
+  api_allowed_prefixes = ('https://yz02202.execute-api.ap-south-1.amazonaws.com/prod/fetchhttpdata');
 
 grant usage on integration fetch_http_data to role sysadmin;
 
@@ -43,7 +43,7 @@ use role sysadmin;
 create or replace external function utils.fetch_http_data(v varchar)
     returns variant
     api_integration = fetch_http_data
-    as 'https://dr14z5kz5d.execute-api.us-east-1.amazonaws.com/prod/fetchhttpdata';
+    as 'https://yz02202.execute-api.ap-south-1.amazonaws.com/prod/fetchhttpdata';
 
 
 -- 1.2.5 Create a few reference tables and populate them with data.
