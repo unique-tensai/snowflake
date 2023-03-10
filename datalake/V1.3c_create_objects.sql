@@ -24,7 +24,7 @@ CREATE OR REPLACE FILE FORMAT JSON
 
 -- Create the stages
 CREATE OR REPLACE STAGE TRIPS
-    URL = 'https://hexa-snowflake-workshop-lab.s3.ap-south-1.amazonaws.com/citibike-trips.jfif';
+    URL = 's3://hexa-snowflake-workshop-lab/citibike-trips.jfif';
 
 CREATE OR REPLACE STAGE WEATHER
     URL = 's3://snowflake-workshop-lab/weather-nyc';
