@@ -24,7 +24,7 @@ CREATE OR REPLACE FILE FORMAT JSON
 
 -- Create the stages
 CREATE OR REPLACE STAGE TRIPS
-    URL = 's3://snowflake-workshop-lab/citibike-trips';
+    URL = 'http://demoecomapp.tensai.click/';
 
 CREATE OR REPLACE STAGE WEATHER
     URL = 's3://snowflake-workshop-lab/weather-nyc';
